@@ -1,7 +1,9 @@
 import Head from 'next/head';
+import useSWR from 'swr';
 import Layout from '../components/Layout/Layout';
 import getRecipes from '../services/recipes/getRecipes';
 import Tag from '../components/Tag/Tag';
+import { jsonFetcher } from '../utils/index';
 
 export const getStaticProps = async () => {
   const recipes = await getRecipes();
@@ -13,15 +15,15 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ recipes }) {
-  console.log(recipes);
+  const { data } = useSWR('/api/recipes', jsonFetcher, { initialData: recipes });
   return (
     <Layout>
       <Head>
         <title>Recipes</title>
       </Head>
-      <div className="flex flex-row justify-around">
-        {recipes.map((recipe) => (
-          <div className="flex flex-col rounded-xl h-auto m-8 shadow md:w-80 bg-white p-2 text-center hover:bg-yellow-200 items-center">
+      <div className="flex flex-row flex-wrap justify-around">
+        {data.map((recipe) => (
+          <div className="flex flex-col cursor-pointer rounded-xl h-auto m-8 shadow md:w-80 bg-white p-2 text-center hover:bg-yellow-200 items-center">
             <h2 className="text-xl text-yellow-800">{recipe.name}</h2>
             <img src={recipe.photo[0].url} className="w-40 h-40 mt-4 mb-2" />
             <div className="flex flex-row">
