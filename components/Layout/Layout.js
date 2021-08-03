@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const navLinks = [
   { path: '/', label: 'Recipe Book', id: 1 },
-  { path: '/add-new', label: 'New recipe', id: 2 }
+  { path: '/addRecipe', label: 'New recipe', id: 2 }
 ];
 
 export default function Layout({ children }) {
