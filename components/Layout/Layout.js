@@ -7,7 +7,7 @@ const navLinks = [
 
 export default function Layout({ children }) {
   return (
-    <div className="font-mono w-full h-full mx-auto">
+    <div className="w-full h-full mx-auto">
       <nav className="bg-yellow-500 w-full h-16 flex justify-between sticky top-0">
         <div className="flex flex-row ml-8">
           <img
@@ -27,7 +27,7 @@ export default function Layout({ children }) {
           </a>
         </Link>
       </nav>
-      <main className="bg-gray-100 p5 h-screen"> {children}</main>
+      <main className="bg-gray-100 p5 h-full"> {children}</main>
       {/* <footer className="bg-blue-400 p-5 text-gray-100 text-center">
         {' '}
         {new Date().getFullYear()}
