@@ -10,11 +10,20 @@ module.exports = {
       },
       fontFamily: {
         nav: ['Indie Flower']
+      },
+      keyframes: {
+        drop: {
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(200px)' }
+        }
+      },
+      animation: {
+        drop: 'drop 1s ease-in-out forwards'
       }
-    }
-  },
-  variants: {
-    extend: {}
-  },
-  plugins: []
+    },
+    variants: {
+      extend: {}
+    },
+    plugins: []
+  }
 };

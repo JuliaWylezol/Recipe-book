@@ -1,12 +1,18 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import Input from '../Input/Input';
 import SelectInput from '../SelectInput/SelectInput';
 import Textarea from '../Textarea/Textarea';
+import Toast from '../Toast/Toast';
 
 export default function Form() {
   const recipeForm = useRef();
+  const router = useRouter();
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isToastActive, setIsToastActive] = useState(false);
 
   const handleSubmit = async (e) => {
+    setIsSubmit(true);
     e.preventDefault();
     const form = new FormData(recipeForm.current);
     const payload = {
@@ -25,6 +31,12 @@ export default function Form() {
         'Content-Type': 'application/json'
       }
     });
+    setIsToastActive(true);
+    setIsSubmit(false);
+    setTimeout(() => {
+      setIsToastActive(false);
+      router.push('/');
+    }, 3000);
   };
   return (
     <form
@@ -48,9 +60,10 @@ export default function Form() {
       <Textarea name="preparation" />
       <input
         type="submit"
-        value="Add recipe"
+        value={isSubmit ? '...Adding new recipe' : 'Add recipe'}
         className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
       />
+      {isToastActive && <Toast />}
     </form>
   );
 }

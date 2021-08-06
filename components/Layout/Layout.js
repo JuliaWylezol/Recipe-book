@@ -28,10 +28,6 @@ export default function Layout({ children }) {
         </Link>
       </nav>
       <main className="bg-gray-100 p5 h-full"> {children}</main>
-      {/* <footer className="bg-blue-400 p-5 text-gray-100 text-center">
-        {' '}
-        {new Date().getFullYear()}
-      </footer> */}
     </div>
   );
 }
