@@ -14,6 +14,7 @@ export default function Form() {
   const handleSubmit = async (e) => {
     setIsSubmit(true);
     e.preventDefault();
+
     const form = new FormData(recipeForm.current);
     const payload = {
       name: form.get('name'),
@@ -31,12 +32,13 @@ export default function Form() {
         'Content-Type': 'application/json'
       }
     });
+
     setIsToastActive(true);
     setIsSubmit(false);
     setTimeout(() => {
       setIsToastActive(false);
       router.push('/');
-    }, 3000);
+    }, 2000);
   };
   return (
     <form

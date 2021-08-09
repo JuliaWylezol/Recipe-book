@@ -1,0 +1,12 @@
+POST http://localhost:3000/addRecipe
+content-type: application/json
+
+{
+  "name": "Lasagne",
+  "photo": [{url: "https://www.mojegotowanie.pl/uploads/media/recipe/0002/02/lasagne-z-sosem-beszamelowym.jpeg"}],
+  "category": "Dinner",
+  "price": "Cheap",
+  "difficulty": "Easy",
+  "ingredients": "pasta, tomato",
+  "preparation": "just do it"
+}

@@ -30,6 +30,7 @@ export default function Home({ recipes }) {
             difficulty={recipe.difficulty}
             price={recipe.price}
             key={recipe.id}
+            id={recipe.id}
           />
         ))}
       </div>

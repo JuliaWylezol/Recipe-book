@@ -3,7 +3,7 @@ import Joi from 'joi';
 
 const schema = Joi.object({
   name: Joi.string().required(),
-  photo: Joi.array().items(Joi.string().required()),
+  photo: Joi.array().items({ url: Joi.string().required() }),
   category: Joi.string()
     .valid('Breakfast', 'Dinner', 'Lunch', 'Dessert', 'Drink', 'Snack')
     .required(),
@@ -14,10 +14,11 @@ const schema = Joi.object({
 });
 
 const create = async (payload) => {
+  const validateRecipe = await schema.validateAsync(payload);
   const recipe = await airDB('recipes').create([
     {
       fields: {
-        ...payload
+        ...validateRecipe
       }
     }
   ]);
