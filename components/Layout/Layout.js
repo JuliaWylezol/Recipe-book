@@ -1,11 +1,15 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 const navLinks = [
   { path: '/', label: 'Recipe Book', id: 1 },
-  { path: '/addRecipe', label: 'New recipe', id: 2 }
+  { path: '/addRecipe', label: 'New recipe', id: 2 },
+  { path: '/register', label: 'Register', id: 3 },
+  { path: '/log', label: 'Log In', id: 4 }
 ];
 
 export default function Layout({ children }) {
+  const [isLogIn, setIsLogIn] = useState(false);
   return (
     <div className="w-full h-full mx-auto">
       <nav className="bg-yellow-500 w-full h-16 flex justify-between sticky top-0">
@@ -22,11 +26,34 @@ export default function Layout({ children }) {
             </a>
           </Link>
         </div>
-        <Link href={navLinks[1].path} key={navLinks[1].id}>
-          <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
-            {navLinks[1].label}
-          </a>
-        </Link>
+        <div>
+          {isLogIn && (
+            <div>
+              <Link href={navLinks[1].path} key={navLinks[1].id}>
+                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                  {navLinks[1].label}
+                </a>
+              </Link>
+              <button className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                Log out
+              </button>
+            </div>
+          )}
+          {!isLogIn && (
+            <div className="mt-4">
+              <Link href={navLinks[3].path} key={navLinks[3].id}>
+                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                  {navLinks[3].label}
+                </a>
+              </Link>
+              <Link href={navLinks[2].path} key={navLinks[2].id}>
+                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                  {navLinks[2].label}
+                </a>
+              </Link>
+            </div>
+          )}
+        </div>
       </nav>
       <main className="bg-gray-100 p5 h-full"> {children}</main>
     </div>

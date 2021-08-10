@@ -1,4 +1,5 @@
 import Layout from '../../components/Layout/Layout';
+import Head from 'next/head';
 import getRecipes from '../../services/recipes/getRecipes';
 import { getRecipeInfo } from '../../services/recipes/getRecipeInfo';
 
@@ -26,6 +27,9 @@ export default function RecipePage({ recipe }) {
   const preparation = recipe.preparation.split(';');
   return (
     <Layout>
+      <Head>
+        <title> {recipe.name} </title>
+      </Head>
       <div className="w-full h-96 flex flex-col items-center mt-12 font-serif">
         <div className="flex justify-between w-1/2">
           <div className="flex flex-col">

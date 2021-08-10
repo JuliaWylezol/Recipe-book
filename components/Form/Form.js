@@ -65,7 +65,7 @@ export default function Form() {
         value={isSubmit ? '...Adding new recipe' : 'Add recipe'}
         className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
       />
-      {isToastActive && <Toast />}
+      {isToastActive && <Toast type="recipe" />}
     </form>
   );
 }

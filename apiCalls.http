@@ -10,3 +10,14 @@ content-type: application/json
   "ingredients": "pasta, tomato",
   "preparation": "just do it"
 }
+
+###
+
+POST http://localhost:3000/api/users
+content-type: application/json
+
+{
+  "email": "bbjj2@i.com",
+  "password": "2511651618",
+  "fullName": "John Doe"
+}
