@@ -38,7 +38,7 @@ export default function Form() {
     setTimeout(() => {
       setIsToastActive(false);
       router.push('/');
-    }, 2000);
+    }, 1500);
   };
   return (
     <form
