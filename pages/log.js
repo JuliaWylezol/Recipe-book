@@ -1,18 +1,51 @@
 import Head from 'next/head';
+import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/client';
 import Input from '../components/Input/Input';
 import Layout from '../components/Layout/Layout';
 
 export default function Log() {
+  const loginForm = useRef();
+  const router = useRouter();
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmit(true);
+    const form = new FormData(loginForm.current);
+    const { ok } = await signIn('credentials', {
+      redirect: false,
+      email: form.get('email'),
+      password: form.get('password')
+    });
+
+    if (ok) {
+      setIsSubmit(false);
+      router.push('/');
+    } else {
+      setIsSubmit(false);
+      window.alert('Wrong email or password. Try again.');
+    }
+  };
   return (
     <Layout>
       <Head>
         <title>Log In</title>
       </Head>
       <h1 className="text-yellow-800 text-4xl font-nav text-center mt-16">Log In</h1>
-      <div className="flex flex-col items-center">
-        <Input type="text" name="username" required style="w-40" />
-        <Input type="text" name="password" required style="w-40" />
-      </div>
+      <form
+        className="flex flex-col items-center mt-4 font-serif text-yellow-500"
+        ref={loginForm}
+        onSubmit={handleSubmit}>
+        <Input type="text" name="email" required />
+        <Input type="password" name="password" required />
+        <input
+          type="submit"
+          value={isSubmit ? '...Loggin' : 'Log in'}
+          className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
+        />
+      </form>
     </Layout>
   );
 }

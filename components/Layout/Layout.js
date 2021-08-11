@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/client';
 
 const navLinks = [
   { path: '/', label: 'Recipe Book', id: 1 },
@@ -9,7 +9,8 @@ const navLinks = [
 ];
 
 export default function Layout({ children }) {
-  const [isLogIn, setIsLogIn] = useState(false);
+  const [session, loading] = useSession();
+
   return (
     <div className="w-full h-full mx-auto">
       <nav className="bg-yellow-500 w-full h-16 flex justify-between sticky top-0">
@@ -27,28 +28,30 @@ export default function Layout({ children }) {
           </Link>
         </div>
         <div>
-          {isLogIn && (
+          {session && (
             <div>
               <Link href={navLinks[1].path} key={navLinks[1].id}>
                 <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
                   {navLinks[1].label}
                 </a>
               </Link>
-              <button className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+              <button
+                onClick={signOut}
+                className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
                 Log out
               </button>
             </div>
           )}
-          {!isLogIn && (
+          {!session && !loading && (
             <div className="mt-4">
-              <Link href={navLinks[3].path} key={navLinks[3].id}>
-                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
-                  {navLinks[3].label}
-                </a>
-              </Link>
               <Link href={navLinks[2].path} key={navLinks[2].id}>
                 <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
                   {navLinks[2].label}
+                </a>
+              </Link>
+              <Link href={navLinks[3].path} key={navLinks[3].id}>
+                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                  {navLinks[3].label}
                 </a>
               </Link>
             </div>

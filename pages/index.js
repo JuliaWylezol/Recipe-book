@@ -16,11 +16,18 @@ export const getStaticProps = async () => {
 
 export default function Home({ recipes }) {
   const { data } = useSWR('/api/recipes', jsonFetcher, { initialData: recipes });
+  // const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Layout>
       <Head>
         <title>Recipes</title>
       </Head>
+      {/* {isLoading && (
+        <div className="rounded w-52 h-12 bg-yellow-500 text-gray-100 text-xl sticky top-1/2 left-1/2 text-center">
+          ...Loading recipe
+        </div>
+      )} */}
       <div className="flex flex-row flex-wrap justify-around">
         {data.map((recipe) => (
           <RecipeShortcut
