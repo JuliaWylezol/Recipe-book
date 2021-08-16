@@ -32,7 +32,6 @@ export default function Form() {
         'Content-Type': 'application/json'
       }
     });
-
     setIsToastActive(true);
     setIsSubmit(false);
     setTimeout(() => {

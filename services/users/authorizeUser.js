@@ -24,7 +24,9 @@ const authorizeUser = async (payload) => {
   if (passwordHash !== user.fields.passwordHash) {
     return null;
   }
+  console.log(user.id, 'id user');
   return {
+    id: user.id,
     email: user.fields.email,
     fullName: user.fields.fullName
   };

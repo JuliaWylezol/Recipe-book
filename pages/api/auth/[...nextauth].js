@@ -3,11 +3,23 @@ import Providers from 'next-auth/providers';
 import authorizeUser from '../../../services/users/authorizeUser';
 
 export default NextAuth({
+  // jwt: {
+  //   signingKey: process.env.JWT_SIGNING_PRIVATE_KEY
+  // },
+  // jwt: {
+  //   signingKey: { kty: 'oct', kid: '--', alg: 'HS256', k: '--' },
+  //   verificationOptions: {
+  //     algorithms: ['HS256']
+  //   }
+  // },
+  session: {
+    jwt: true
+  },
   providers: [
     Providers.Credentials({
       name: 'Credentials',
       credentials: {
-        email: { label: 'email', type: 'text', placeholder: 'jsmith' },
+        email: { label: 'email', type: 'text', placeholder: 'email' },
         password: { label: 'password', type: 'password' }
       },
       async authorize(credentials) {
@@ -28,8 +40,14 @@ export default NextAuth({
     async jwt(token, user) {
       if (user) {
         token.name = user?.fullName;
+        token.email = user?.email;
       }
       return token;
     }
+    // async session(session, token) {
+    //   session.user.name = token?.name;
+    //   session.user.email = token?.email;
+    //   return session;
+    // }
   }
 });

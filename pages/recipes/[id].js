@@ -2,9 +2,11 @@ import Layout from '../../components/Layout/Layout';
 import Head from 'next/head';
 import getRecipes from '../../services/recipes/getRecipes';
 import { getRecipeInfo } from '../../services/recipes/getRecipeInfo';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths = async () => {
   const recipes = await getRecipes();
+
   return {
     paths: recipes.map((recipe) => ({ params: { id: String(recipe.id) } })),
     fallback: false
@@ -25,11 +27,19 @@ export const getStaticProps = async ({ params }) => {
 export default function RecipePage({ recipe }) {
   const ingredients = recipe.ingredients.split(';');
   const preparation = recipe.preparation.split(';');
+  const router = useRouter();
+
+  const handleDelete = () => {
+    console.log(recipe['name(from users)']);
+  };
   return (
     <Layout>
       <Head>
         <title> {recipe.name} </title>
       </Head>
+      <button className=" w-48 h-16 bg-blue-400 text-white" onClick={handleDelete}>
+        Delete recipe
+      </button>
       <div className="w-full h-96 flex flex-col items-center mt-12 font-serif">
         <div className="flex justify-between w-1/2">
           <div className="flex flex-col">

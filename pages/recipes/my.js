@@ -1,20 +1,10 @@
-import Head from 'next/head';
-import useSWR from 'swr';
-import Layout from '../components/Layout/Layout';
-import RecipeShortcut from '../components/Recipe/RecipeShortcut';
-import getRecipes from '../services/recipes/getRecipes';
-import { jsonFetcher } from '../utils/index';
+/* eslint-disable react/no-unescaped-entities */
+import getByUser from '../../services/recipes/getByUser';
+import { getSession } from 'next-auth/client';
 import { useState } from 'react';
-import search from '../services/recipes/search';
-
-export const getStaticProps = async () => {
-  const recipes = await getRecipes();
-  return {
-    props: {
-      recipes
-    }
-  };
-};
+import Layout from '../../components/Layout/Layout';
+import RecipeShortcut from '../../components/Recipe/RecipeShortcut';
+import search from '../../services/recipes/search';
 
 const tags = [
   'Breakfast',
@@ -31,17 +21,31 @@ const tags = [
   'Hard'
 ];
 
-export default function Home({ recipes }) {
-  const { data } = useSWR('/api/recipes', jsonFetcher, { initialData: recipes });
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permament: false
+      }
+    };
+  }
+  const recipes = await getByUser(session.user.email);
+  return {
+    props: {
+      recipes: recipes
+    }
+  };
+};
+
+export default function My({ recipes }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [tagTerm, setTagTerm] = useState('');
-
   return (
     <Layout>
-      <Head>
-        <title>Recipes</title>
-      </Head>
-      <div className="flex justify-center">
+      <h1 className="font-nav text-yellow-800 text-4xl text-center mt-8">My recipes</h1>
+      <div className="flex justify-center mt-4">
         <input
           type="text"
           placeholder="Search recipe..."
@@ -64,7 +68,12 @@ export default function Home({ recipes }) {
         </select>
       </div>
       <div className="flex flex-row flex-wrap justify-around">
-        {data
+        {recipes.length === 0 && (
+          <h2 className="mt-20 text-xl bg-yellow-500 py-2 px-36 text-gray-100">
+            You don't have any recipes.
+          </h2>
+        )}
+        {recipes
           .filter((val) => search(val, searchTerm, tagTerm))
           .map((recipe) => (
             <RecipeShortcut

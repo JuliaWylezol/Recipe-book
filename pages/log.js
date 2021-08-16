@@ -20,11 +20,10 @@ export default function Log() {
       password: form.get('password')
     });
 
+    setIsSubmit(false);
     if (ok) {
-      setIsSubmit(false);
       router.push('/');
     } else {
-      setIsSubmit(false);
       window.alert('Wrong email or password. Try again.');
     }
   };
@@ -42,7 +41,7 @@ export default function Log() {
         <Input type="password" name="password" required />
         <input
           type="submit"
-          value={isSubmit ? '...Loggin' : 'Log in'}
+          value={isSubmit ? '...Please wait' : 'Log in'}
           className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
         />
       </form>
