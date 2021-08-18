@@ -2,7 +2,6 @@ import Layout from '../../components/Layout/Layout';
 import Head from 'next/head';
 import getRecipes from '../../services/recipes/getRecipes';
 import { getRecipeInfo } from '../../services/recipes/getRecipeInfo';
-import { useRouter } from 'next/router';
 
 export const getStaticPaths = async () => {
   const recipes = await getRecipes();
@@ -27,7 +26,6 @@ export const getStaticProps = async ({ params }) => {
 export default function RecipePage({ recipe }) {
   const ingredients = recipe.ingredients.split(';');
   const preparation = recipe.preparation.split(';');
-  const router = useRouter();
 
   const handleDelete = () => {
     console.log(recipe['name(from users)']);
@@ -51,21 +49,25 @@ export default function RecipePage({ recipe }) {
           <img src={recipe.photo[0].url} className="w-64" alt=""></img>
         </div>
         <div className="flex flex-col w-1/2 mb-4">
-          <h3 className="mt-4 text-xl text-yellow-800 mb-6">Ingredients</h3>
+          <h3 className=" text-xl text-yellow-800 my-5">Ingredients</h3>
           {ingredients.map((ingredient) => (
-            <div key={ingredient}>
-              <span className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-3 inline-block"></span>
-              <p className="inline-block">{ingredient}</p>
-            </div>
+            <ul key={ingredient}>
+              <li>
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-3 inline-block"></span>
+                {ingredient}
+              </li>
+            </ul>
           ))}
         </div>
         <div className="flex flex-col w-1/2 pb-10">
-          <h3 className="mt-4 text-xl text-yellow-800 mb-6">Preparation</h3>
+          <h3 className="text-xl text-yellow-800 my-5">Preparation</h3>
           {preparation.map((step) => (
-            <div key={step} className="inline-block">
-              <span className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-3 inline-block"></span>
-              <p className="break-words inline-block">{step}</p>
-            </div>
+            <ul key={step}>
+              <li className="mb-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-3 inline-block"></span>
+                {step}
+              </li>
+            </ul>
           ))}
         </div>
       </div>

@@ -17,7 +17,6 @@ export default async (req, res) => {
           return res.status(401).json({ error: 'not_authorized' });
         }
         const payload = req.body;
-        console.log('usermail', session.user.email);
         const userEmail = session.user.email;
         const recipe = await createRecipe(payload, userEmail);
         res.status(200).json({ status: 'created', recipe });

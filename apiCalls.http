@@ -21,3 +21,8 @@ content-type: application/json
   "password": "2511651618",
   "fullName": "John Doe"
 }
+
+###
+
+GET http://localhost:3000/api/recipes/paginate?category=lunch
+

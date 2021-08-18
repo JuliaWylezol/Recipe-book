@@ -29,6 +29,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-onchange': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
