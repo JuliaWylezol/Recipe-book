@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { signIn, useSession } from 'next-auth/client';
+import { signIn } from 'next-auth/client';
 import Input from '../components/Input/Input';
 import Layout from '../components/Layout/Layout';
 

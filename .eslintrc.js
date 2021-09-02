@@ -25,6 +25,7 @@ module.exports = {
   ],
   rules: {
     'react/prop-types': 'off',
+    'no-unused-vars': 0,
     'prettier/prettier': ['error', { endOfLine: 'auto' }, { usePrettierrc: true }], // Use our .prettierrc file as source
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
