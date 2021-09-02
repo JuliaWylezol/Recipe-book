@@ -6,6 +6,6 @@ export const getRecipeInfo = async (id) => {
     .firstPage();
 
   if (recipes && recipes[0]) {
-    return recipes[0].fields;
+    return { airtableID: recipes[0].id, ...recipes[0].fields };
   }
 };

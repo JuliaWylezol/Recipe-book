@@ -1,13 +1,8 @@
 import airDB from '../airtableClient';
 
-const deleteRecipe = async (id) => {
-  await airDB('recipes').destroy([`${id}`], function (err, deletedRecipe) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log('deleted recipe', deletedRecipe);
-  });
+const deleteRecipe = async (airtableId) => {
+  const recipe = await airDB('recipes').destroy([airtableId]);
+  return recipe;
 };
 
 export default deleteRecipe;
