@@ -5,6 +5,9 @@ module.exports = {
   darkMode: 'media', // 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        200: '52rem'
+      },
       colors: {
         'accent-1': '#333'
       },

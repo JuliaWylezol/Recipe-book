@@ -41,9 +41,7 @@ export default function Layout({ children }) {
                   {navLinks[1].label}
                 </a>
               </Link>
-              <button
-                onClick={signOut}
-                className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+              <button onClick={signOut} className=" p-4 text-xl font-serif text-yellow-800">
                 Log out
               </button>
             </div>
