@@ -33,7 +33,7 @@ export default function Home({ allRecipes }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [tagTerm, setTagTerm] = useState('');
   const [firstIndex, setFirstIndex] = useState(0);
-  const [lastIndex, setLastIndex] = useState(7);
+  const [lastIndex, setLastIndex] = useState(11);
   const [currentRecipes, setRecipes] = useState(allRecipes.slice(firstIndex, lastIndex + 1));
 
   useEffect(() => {
@@ -43,14 +43,14 @@ export default function Home({ allRecipes }) {
 
   const loadMore = () => {
     if (lastIndex > allRecipes.length) return;
-    setFirstIndex((prevState) => prevState + 8);
-    setLastIndex((prevState) => prevState + 8);
+    setFirstIndex((prevState) => prevState + 12);
+    setLastIndex((prevState) => prevState + 12);
   };
 
   const loadBack = () => {
     if (firstIndex === 0) return;
-    setFirstIndex((prevState) => prevState - 8);
-    setLastIndex((prevState) => prevState - 8);
+    setFirstIndex((prevState) => prevState - 12);
+    setLastIndex((prevState) => prevState - 12);
   };
 
   return (
