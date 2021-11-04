@@ -13,16 +13,15 @@ const schema = Joi.object({
   preparation: Joi.string().required()
 });
 
-const create = async (payload, userEmail) => {
+const create = async (payload, userId) => {
   console.log('create');
-  console.log(userEmail);
+
   const validateRecipe = await schema.validateAsync(payload);
   const recipe = await airDB('recipes').create([
     {
       fields: {
         ...validateRecipe,
-        email: [userEmail]
-        // users: [userEmail]
+        email: [userId]
       }
     }
   ]);

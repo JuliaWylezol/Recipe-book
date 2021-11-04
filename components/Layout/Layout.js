@@ -32,16 +32,16 @@ export default function Layout({ children }) {
           {session && (
             <div>
               <Link href={navLinks[4].path} key={navLinks[4].id}>
-                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                <a className="text-gray-100 p-4 text-l font-serif hover:text-yellow-800">
                   {navLinks[4].label}
                 </a>
               </Link>
               <Link href={navLinks[1].path} key={navLinks[1].id}>
-                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                <a className="text-gray-100 p-4 text-l font-serif hover:text-yellow-800">
                   {navLinks[1].label}
                 </a>
               </Link>
-              <button onClick={signOut} className=" p-4 text-xl font-serif text-yellow-800">
+              <button onClick={signOut} className=" p-4 text-l font-serif text-yellow-800">
                 Log out
               </button>
             </div>
@@ -49,12 +49,12 @@ export default function Layout({ children }) {
           {!session && !loading && (
             <div className="mt-4">
               <Link href={navLinks[2].path} key={navLinks[2].id}>
-                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                <a className="text-gray-100 p-4 text-l font-serif hover:text-yellow-800">
                   {navLinks[2].label}
                 </a>
               </Link>
               <Link href={navLinks[3].path} key={navLinks[3].id}>
-                <a className="text-gray-100 p-4 text-xl font-serif hover:text-yellow-800">
+                <a className="text-gray-100 p-4 text-l font-serif hover:text-yellow-800">
                   {navLinks[3].label}
                 </a>
               </Link>

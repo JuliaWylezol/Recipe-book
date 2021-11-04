@@ -3,9 +3,9 @@ import Providers from 'next-auth/providers';
 import authorizeUser from '../../../services/users/authorizeUser';
 
 export default NextAuth({
-  // jwt: {
-  //   signingKey: process.env.JWT_SIGNING_PRIVATE_KEY
-  // },
+  jwt: {
+    signingKey: process.env.JWT_SIGNING_PRIVATE_KEY
+  },
   // jwt: {
   //   signingKey: { kty: 'oct', kid: '--', alg: 'HS256', k: '--' },
   //   verificationOptions: {
@@ -41,13 +41,15 @@ export default NextAuth({
       if (user) {
         token.name = user?.fullName;
         token.email = user?.email;
+        token.id = user?.id;
       }
       return token;
+    },
+    async session(session, token) {
+      session.user.name = token?.name;
+      session.user.email = token?.email;
+      session.user.id = token?.id;
+      return session;
     }
-    // async session(session, token) {
-    //   session.user.name = token?.name;
-    //   session.user.email = token?.email;
-    //   return session;
-    // }
   }
 });
