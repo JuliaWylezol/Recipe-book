@@ -1,12 +1,11 @@
 import deleteRecipe from '../../../services/recipes/delete';
 import editRecipe from '../../../services/recipes/edit';
-import getRecipeInfo from '../../../services/recipes/getRecipeInfo';
+import { getRecipeInfo } from '../../../services/recipes/getRecipeInfo';
 import isAuthorized from '../../../services/recipes/isAuthorized';
 import { getSession } from 'next-auth/client';
 
 export default async (req, res) => {
   const session = await getSession({ req });
-  console.log(session, 'session');
   let recipe = await getRecipeInfo(req.query.id);
   if (!isAuthorized(recipe, session)) {
     return res.status(401).json({ error: 'not_authorized' });
