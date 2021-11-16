@@ -3,7 +3,6 @@ import createRecipe from '../../../services/recipes/create';
 import { getSession } from 'next-auth/client';
 
 export default async (req, res) => {
-  console.log('in');
   switch (req.method) {
     case 'GET': {
       const recipes = await getRecipes();

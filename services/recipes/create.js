@@ -14,8 +14,6 @@ const schema = Joi.object({
 });
 
 const create = async (payload, userId) => {
-  console.log('create');
-
   const validateRecipe = await schema.validateAsync(payload);
   const recipe = await airDB('recipes').create([
     {

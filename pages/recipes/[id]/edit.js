@@ -95,7 +95,7 @@ export default function RecipeEdit({ recipe }) {
           value={isSubmit ? '...Editing your recipe' : 'Edit recipe'}
           className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
         />
-        {isToastActive && <Toast type="recipe" />}
+        {isToastActive && <Toast type="edit" />}
       </form>
     </Layout>
   );

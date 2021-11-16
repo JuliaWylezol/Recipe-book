@@ -68,7 +68,7 @@ export default function Register() {
           value={isSubmit ? '...Adding new user' : 'Register'}
           className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
         />
-        {isToastActive && <Toast type="user" />}
+        {isToastActive && <Toast type="register" />}
       </form>
     </Layout>
   );
