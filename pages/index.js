@@ -42,7 +42,9 @@ export default function Home({ allRecipes }) {
   }, [firstIndex, lastIndex]);
 
   const loadMore = () => {
-    if (lastIndex > allRecipes.length) return;
+    console.log(allRecipes.length);
+    console.log(lastIndex);
+    if (lastIndex + 1 >= allRecipes.length) return;
     setFirstIndex((prevState) => prevState + 12);
     setLastIndex((prevState) => prevState + 12);
   };
