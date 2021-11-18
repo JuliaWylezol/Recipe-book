@@ -33,12 +33,13 @@ export default function RecipePage({ recipe }) {
   const ingredients = recipe.ingredients.split(';');
   const preparation = recipe.preparation.split(';');
   const [isToastActive, setIsToastActive] = useState(false);
+  const [isQuestionActive, setIsQuestionActive] = useState(false);
   const router = useRouter();
   const [session] = useSession();
 
   const handleDelete = async (e) => {
     e.preventDefault();
-
+    setIsQuestionActive(false);
     await fetch(`/api/recipes/${recipe.id}`, {
       method: 'DELETE',
       body: JSON.stringify(recipe),
@@ -49,7 +50,7 @@ export default function RecipePage({ recipe }) {
     setIsToastActive(true);
     setTimeout(() => {
       setIsToastActive(false);
-      router.push(`/`);
+      router.push(`/recipes/my`);
     }, 1500);
   };
 
@@ -73,7 +74,7 @@ export default function RecipePage({ recipe }) {
             </Link>
           )}
           {isAuthorized(recipe, session) && (
-            <button onClick={handleDelete} className="ml-2">
+            <button onClick={() => setIsQuestionActive(true)} className="ml-2">
               <img
                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQyNCA2NGgtODh2LTE2YzAtMjYuNDY3LTIxLjUzMy00OC00OC00OGgtNjRjLTI2LjQ2NyAwLTQ4IDIxLjUzMy00OCA0OHYxNmgtODhjLTIyLjA1NiAwLTQwIDE3Ljk0NC00MCA0MHY1NmMwIDguODM2IDcuMTY0IDE2IDE2IDE2aDguNzQ0bDEzLjgyMyAyOTAuMjgzYzEuMjIxIDI1LjYzNiAyMi4yODEgNDUuNzE3IDQ3Ljk0NSA0NS43MTdoMjQyLjk3NmMyNS42NjUgMCA0Ni43MjUtMjAuMDgxIDQ3Ljk0NS00NS43MTdsMTMuODIzLTI5MC4yODNoOC43NDRjOC44MzYgMCAxNi03LjE2NCAxNi0xNnYtNTZjMC0yMi4wNTYtMTcuOTQ0LTQwLTQwLTQwem0tMjE2LTE2YzAtOC44MjIgNy4xNzgtMTYgMTYtMTZoNjRjOC44MjIgMCAxNiA3LjE3OCAxNiAxNnYxNmgtOTZ6bS0xMjggNTZjMC00LjQxMSAzLjU4OS04IDgtOGgzMzZjNC40MTEgMCA4IDMuNTg5IDggOHY0MGMtNC45MzEgMC0zMzEuNTY3IDAtMzUyIDB6bTMxMy40NjkgMzYwLjc2MWMtLjQwNyA4LjU0NS03LjQyNyAxNS4yMzktMTUuOTgxIDE1LjIzOWgtMjQyLjk3NmMtOC41NTUgMC0xNS41NzUtNi42OTQtMTUuOTgxLTE1LjIzOWwtMTMuNzUxLTI4OC43NjFoMzAyLjQ0eiIgZmlsbD0iI2I0NTMwOSIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIGQ9Im0yNTYgNDQ4YzguODM2IDAgMTYtNy4xNjQgMTYtMTZ2LTIwOGMwLTguODM2LTcuMTY0LTE2LTE2LTE2cy0xNiA3LjE2NC0xNiAxNnYyMDhjMCA4LjgzNiA3LjE2MyAxNiAxNiAxNnoiIGZpbGw9IiNiNDUzMDkiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD48cGF0aCBkPSJtMzM2IDQ0OGM4LjgzNiAwIDE2LTcuMTY0IDE2LTE2di0yMDhjMC04LjgzNi03LjE2NC0xNi0xNi0xNnMtMTYgNy4xNjQtMTYgMTZ2MjA4YzAgOC44MzYgNy4xNjMgMTYgMTYgMTZ6IiBmaWxsPSIjYjQ1MzA5IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIj48L3BhdGg+PHBhdGggZD0ibTE3NiA0NDhjOC44MzYgMCAxNi03LjE2NCAxNi0xNnYtMjA4YzAtOC44MzYtNy4xNjQtMTYtMTYtMTZzLTE2IDcuMTY0LTE2IDE2djIwOGMwIDguODM2IDcuMTYzIDE2IDE2IDE2eiIgZmlsbD0iI2I0NTMwOSIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjwvZz48L2c+PC9zdmc+"
                 alt="delete"
@@ -91,6 +92,21 @@ export default function RecipePage({ recipe }) {
             </button>
           </Link>
         </div>
+        {isQuestionActive && (
+          <div className="w-96 h-40 absolute top-60 border-black bg-yellow-500 text-center ">
+            <p className="pt-8 text-gray-100">Are you sure you want to delete this recipe?</p>
+            <button
+              onClick={handleDelete}
+              className="bg-yellow-100 py-3 px-8 mr-4 mt-6 text-yellow-700">
+              YES
+            </button>
+            <button
+              onClick={() => setIsQuestionActive(false)}
+              className="bg-yellow-100 text-yellow-700 py-3 px-8 ml-4 mt-6">
+              NO
+            </button>
+          </div>
+        )}
         <div className="flex justify-between w-3/4">
           <div className="flex flex-col">
             <h2 className="font-nav text-4xl text-yellow-800 w-4/5">{recipe.name}</h2>
