@@ -55,11 +55,27 @@ export default function RecipePage({ recipe }) {
   };
 
   return (
-    <Layout>
+    <Layout className="h-full">
       <Head>
         <title> {recipe.name} </title>
       </Head>
-
+      {isQuestionActive && (
+        <div className="w-full h-full absolute flex justify-center top-0 right-0 bg-black bg-opacity-50">
+          <div className="w-96 h-40 absolute top-60 border-black bg-yellow-500 text-center">
+            <p className="pt-8 text-gray-100">Are you sure you want to delete this recipe?</p>
+            <button
+              onClick={handleDelete}
+              className="bg-yellow-100 py-3 px-8 mr-4 mt-6 text-yellow-700">
+              YES
+            </button>
+            <button
+              onClick={() => setIsQuestionActive(false)}
+              className="bg-yellow-100 text-yellow-700 py-3 px-8 ml-4 mt-6">
+              NO
+            </button>
+          </div>
+        </div>
+      )}
       <div className="w-200 h-auto flex flex-col items-center my-12 mx-auto p-4 rounded-lg font-serif bg-yellow-100">
         <div className="flex justify-around w-32 my-2 pb-4 self-end">
           {isAuthorized(recipe, session) && (
@@ -92,21 +108,7 @@ export default function RecipePage({ recipe }) {
             </button>
           </Link>
         </div>
-        {isQuestionActive && (
-          <div className="w-96 h-40 absolute top-60 border-black bg-yellow-500 text-center ">
-            <p className="pt-8 text-gray-100">Are you sure you want to delete this recipe?</p>
-            <button
-              onClick={handleDelete}
-              className="bg-yellow-100 py-3 px-8 mr-4 mt-6 text-yellow-700">
-              YES
-            </button>
-            <button
-              onClick={() => setIsQuestionActive(false)}
-              className="bg-yellow-100 text-yellow-700 py-3 px-8 ml-4 mt-6">
-              NO
-            </button>
-          </div>
-        )}
+
         <div className="flex justify-between w-3/4">
           <div className="flex flex-col">
             <h2 className="font-nav text-4xl text-yellow-800 w-4/5">{recipe.name}</h2>
