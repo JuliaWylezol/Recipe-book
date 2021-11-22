@@ -6,7 +6,6 @@ const getRecipes = async () => {
       sort: [{ field: 'name', direction: 'asc' }]
     })
     .firstPage();
-
   return recipes.map((recipe) => recipe.fields);
 };
 

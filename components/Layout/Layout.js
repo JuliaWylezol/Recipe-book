@@ -3,7 +3,7 @@ import { signOut, useSession } from 'next-auth/client';
 
 const navLinks = [
   { path: '/', label: 'Recipe Book', id: 1 },
-  { path: '/recipes/add', label: 'New recipe', id: 2 },
+  { path: '/recipes/add', label: 'Add new recipe', id: 2 },
   { path: '/register', label: 'Register', id: 3 },
   { path: '/log', label: 'Log In', id: 4 },
   { path: '/recipes/my', label: 'My recipes', id: 5 }
@@ -48,6 +48,11 @@ export default function Layout({ children }) {
           )}
           {!session && !loading && (
             <div className="mt-4">
+              <Link href={navLinks[3].path} key={navLinks[1].id}>
+                <a className="text-gray-100 p-4 text-l font-serif hover:text-yellow-800">
+                  {navLinks[1].label}
+                </a>
+              </Link>
               <Link href={navLinks[2].path} key={navLinks[2].id}>
                 <a className="text-gray-100 p-4 text-l font-serif hover:text-yellow-800">
                   {navLinks[2].label}

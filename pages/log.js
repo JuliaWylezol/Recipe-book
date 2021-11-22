@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/client';
 import Input from '../components/Input/Input';
 import Layout from '../components/Layout/Layout';
+import Link from 'next/link';
 
 export default function Log() {
   const loginForm = useRef();
@@ -44,6 +45,11 @@ export default function Log() {
           value={isSubmit ? '...Please wait' : 'Log in'}
           className="m-10 p-4 rounded bg-yellow-600 text-gray-200 hover:bg-yellow-700"
         />
+        <Link href="/register" key="Register">
+          <a className="text-yellow-800 p-4 text-l font-serif hover:text-yellow-500">
+            You don't have an account? Register for free
+          </a>
+        </Link>
       </form>
     </Layout>
   );
