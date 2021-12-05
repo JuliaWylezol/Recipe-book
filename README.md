@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## How to run project?
+
+You can easily run the project using vercel: https://recipe-book-sooty.vercel.app/
+
 ## Getting Started
 
 First, run the development server:
